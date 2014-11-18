@@ -1,0 +1,18 @@
+# Eclipse metadata
+.metadata/
+RemoteSystemsTempFiles/
+
+# Maven build artifacts
+target/
+
+# Copyright tool log
+copyrightLog.txt
+
+# Experimental stuff, not ready for versioning
+experimental/
+
+# MacOS metadata
+.DS_Store
+
+
+

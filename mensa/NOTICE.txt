@@ -1,0 +1,15 @@
+Dell Mensa
+Copyright 2014, Dell Inc.
+All Rights Reserved.
+
+This product uses FindBugs annotations 3.0.0 from:
+http://findbugs.sourceforge.net/
+Copyright (c) 2003 - 2012 University of Maryland
+
+This product uses Apache log4j 2.0.2 from:
+http://logging.apache.org/log4j/2.x/
+Copyright (c) 1999-2014 Apache Software Foundation
+
+This product uses JUnit 4.12-beta-3 from:
+http://junit.org/
+Copyright (c) 2002-2014 JUnit
