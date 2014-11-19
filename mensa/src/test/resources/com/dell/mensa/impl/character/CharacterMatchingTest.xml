@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests>
+	<globals>
+		<caseExtension enabled="true" />
+		<punctuationExtension enabled="true" />
+		<wordBreakExtension enabled="true" />
+
+		<notifyLongestKeywordsOnly enabled="true" />
+		<notifyMostPreciseMatch enabled="false" />
+		<notifyRawSymbols enabled="true" />
+
+		<keyword>Hello World</keyword>
+		<keyword>Goodbye World</keyword>
+		<keyword>Apache (server)</keyword>
+		<keyword>Dr.</keyword>
+		<keyword>(TBD)</keyword>
+		<keyword>:isdigit</keyword>
+		<keyword>.Net</keyword>
+		<keyword>1&amp;1</keyword>
+		
+		<keyword caseSensitive="true">UPPER</keyword>
+		<keyword caseSensitive="false">Upper</keyword>
+		<keyword caseSensitive="true">lower</keyword>
+		<keyword caseSensitive="false">Lower</keyword>
+		<keyword caseSensitive="true">MiXeD</keyword>
+		<keyword caseSensitive="false">Mixed</keyword>
+		
+		<keyword punctuationSensitive="true">at&amp;t</keyword>
+		<keyword punctuationSensitive="false">AT&amp;T</keyword>
+		<keyword caseSensitive="true">ATT</keyword>
+
+		<keyword punctuationSensitive="true">mr. .com</keyword>
+		<keyword punctuationSensitive="false">MR. .COM</keyword>
+		
+		<keyword id="p21_p" punctuationSensitive="true">Oncogene Protein p21(ras)</keyword>
+		<keyword id="p21_pc" caseSensitive="true" punctuationSensitive="true">Oncogene Protein p21(ras)</keyword>
+		<keyword id="p21_c" caseSensitive="true">Oncogene Protein p21(ras)</keyword>
+		<keyword id="p21">Oncogene Protein p21(ras)</keyword>
+		
+		<keyword>Ambrysus (Ambrysus) arizonus</keyword>
+		<keyword>Ambrysus (Ambrysus)</keyword>
+		<keyword>Procambarus (Pennides)</keyword>
+		
+		<keyword>La.</keyword>
+		<keyword>La</keyword>
+		
+		<!-- Hagatna vs. Hagåtña -->
+		<keyword id="Hagatna">Hagatna</keyword>
+		<keyword id="Hagatna_c" caseSensitive="true">Hagatna</keyword>
+		<keyword id="Hag&#229;t&#241;a">Hag&#229;t&#241;a</keyword>
+		<keyword id="Hag&#229;t&#241;a_c" caseSensitive="true">Hag&#229;t&#241;a</keyword>
+		
+		<keyword>Florida</keyword>
+		<keyword>Florida City</keyword>
+		<keyword>Republic</keyword>
+		<keyword>West</keyword>
+		<keyword>Westover A.F.B.</keyword>
+		<keyword>Western</keyword>
+		<keyword>Indian</keyword>
+		<keyword>Stream</keyword>
+		
+		<!-- Note: Lecanium is a suffix of Asterolecanium -->
+		<keyword>Lecanium</keyword>
+		<keyword>Asterolecanium</keyword>
+		
+		<keyword>City</keyword>
+		<keyword>Lake City</keyword>
+		<keyword>Salt Lake City</keyword>
+		
+	</globals>
+
+	<testCase>
+		<symbols>a</symbols>
+	</testCase>
+	<testCase>
+		<symbols>aa</symbols>
+	</testCase>
+	<testCase>
+		<symbols>a b</symbols>
+	</testCase>
+	<testCase>
+		<symbols>a-b</symbols>
+	</testCase>
+	<testCase>
+		<symbols>(a)</symbols>
+	</testCase>
+	<testCase>
+		<symbols>(a) or (b)</symbols>
+	</testCase>
+	<testCase>
+		<symbols>(a) or (b)</symbols>
+	</testCase>
+	<testCase>
+		<symbols>(a) or (b) or (c)</symbols>
+	</testCase>
+	<testCase>
+		<symbols>a or (b) or c</symbols>
+	</testCase>
+	<testCase>
+		<symbols>#1</symbols>
+	</testCase>
+	<testCase>
+		<symbols>1#</symbols>
+	</testCase>
+
+	<testCase>
+		<text>Hello World</text>
+		<expectedMatch kwid="Hello World" start="0" end="11"
+			raw="Hello World" />
+	</testCase>
+	<testCase>
+		<text> Hello World </text>
+		<expectedMatch kwid="Hello World" start="1" end="12"
+			raw="Hello World" />
+	</testCase>
+	<testCase>
+		<text>HELLO WORLD</text>
+		<caseExtension enabled="false" />
+	</testCase>
+	<testCase>
+		<text>HELLO WORLD</text>
+		<expectedMatch kwid="Hello World" start="0" end="11"
+			raw="HELLO WORLD" />
+	</testCase>
+	<testCase>
+		<text>... Hello World ...</text>
+		<expectedMatch kwid="Hello World" start="4" end="15"
+			raw="Hello World" />
+	</testCase>
+	<testCase>
+		<text>Hello, World</text>
+		<expectedMatch kwid="Hello World" start="0" end="12"
+			raw="Hello, World" />
+	</testCase>
+	<testCase>
+		<text>Hello&#xA; World</text>
+		<expectedMatch kwid="Hello World" start="0" end="12"
+			raw="Hello&#xA; World" />
+	</testCase>
+	<testCase>
+		<text>Hello&#xA; World&#xA;</text>
+		<expectedMatch kwid="Hello World" start="0" end="12"
+			raw="Hello&#xA; World" />
+	</testCase>
+	<testCase>
+		<text>Hello&#x9;World</text>
+		<expectedMatch kwid="Hello World" start="0" end="11"
+			raw="Hello&#x9;World" />
+	</testCase>
+	<testCase>
+		<text>Hello&#xD;&#xA; World&#xA;</text>
+		<expectedMatch kwid="Hello World" start="0" end="13"
+			raw="Hello&#xD;&#xA; World" />
+	</testCase>
+	<testCase>
+		<text>HELLO,&#x0A; WORLD&#x0A; &#x0A;</text>
+		<expectedMatch kwid="Hello World" start="0" end="13"
+			raw="HELLO,&#x0A; WORLD" />
+	</testCase>
+	<testCase>
+		<text>Goodbye,&#x0A; WORLD&#x0A; &#x0A;</text>
+		<expectedMatch kwid="Goodbye World" start="0" end="15"
+			raw="Goodbye,&#x0A; WORLD" />
+	</testCase>
+	<testCase>
+		<text>Apache (server)</text>
+		<expectedMatch kwid="Apache (server)" start="0" end="15"
+			raw="Apache (server)" />
+	</testCase>
+	<testCase>
+		<text> Apache (server) </text>
+		<expectedMatch kwid="Apache (server)" start="1" end="16"
+			raw="Apache (server)" />
+	</testCase>
+	<testCase>
+		<text>Apache ( server )</text>
+		<expectedMatch kwid="Apache (server)" start="0" end="17"
+			raw="Apache ( server )" />
+	</testCase>
+	<testCase>
+		<text>Apache&#xA;(server)</text>
+		<expectedMatch kwid="Apache (server)" start="0" end="15"
+			raw="Apache&#xA;(server)" />
+	</testCase>
+	<testCase>
+		<text>Apache&#xA;server</text>
+		<expectedMatch kwid="Apache (server)" start="0" end="13"
+			raw="Apache&#xA;server" />
+	</testCase>
+	<testCase>
+		<text>Apache  &#xA;(server)</text>
+		<expectedMatch kwid="Apache (server)" start="0" end="17"
+			raw="Apache  &#xA;(server)" />
+	</testCase>
+	<testCase>
+		<text>APACHE  &#xA;(SERVER)</text>
+		<expectedMatch kwid="Apache (server)" start="0" end="17"
+			raw="APACHE  &#xA;(SERVER)" />
+	</testCase>
+	<testCase>
+		<text>:isdigit</text>
+		<expectedMatch kwid=":isdigit" start="0" end="8" raw=":isdigit" />
+	</testCase>
+	<testCase>
+		<text>isdigit</text>
+		<expectedMatch kwid=":isdigit" start="0" end="7" raw="isdigit" />
+	</testCase>
+	<testCase>
+		<text>Dr., Dr., give the news...</text>
+		<expectedMatch kwid="Dr." start="0" end="3" raw="Dr." />
+		<expectedMatch kwid="Dr." start="5" end="8" raw="Dr." />
+	</testCase>
+	<testCase>
+		<text>Dr..Net</text>
+		<expectedMatch kwid="Dr." start="0" end="3" raw="Dr." />
+		<expectedMatch kwid=".Net" start="3" end="7" raw=".Net" />
+	</testCase>
+	<testCase>
+		<text>Dr. .Net</text>
+		<expectedMatch kwid="Dr." start="0" end="3" raw="Dr." />
+		<expectedMatch kwid=".Net" start="4" end="8" raw=".Net" />
+	</testCase>
+	<testCase>
+		<text>Dr.-.Net</text>
+		<expectedMatch kwid="Dr." start="0" end="3" raw="Dr." />
+		<expectedMatch kwid=".Net" start="4" end="8" raw=".Net" />
+	</testCase>
+	<testCase>
+		<text>tbd</text>
+		<expectedMatch kwid="(TBD)" start="0" end="3" raw="tbd" />
+	</testCase>
+	<testCase>
+		<text>(tbd)</text>
+		<expectedMatch kwid="(TBD)" start="0" end="5" raw="(tbd)" />
+	</testCase>
+	<testCase>
+		<text>1&amp;1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="3" raw="1&amp;1" />
+	</testCase>
+	<testCase>
+		<text>1 &amp; 1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="5" raw="1 &amp; 1" />
+	</testCase>
+	<testCase>
+		<text>11&amp;1</text>
+	</testCase>
+	<testCase>
+		<text>1&amp;11</text>
+	</testCase>
+	<testCase>
+		<text>11&amp;11</text>
+	</testCase>
+	<testCase>
+		<text>11&amp;1</text>
+		<wordBreakExtension enabled="false" />
+		<expectedMatch kwid="1&amp;1" start="1" end="4" raw="1&amp;1" />
+	</testCase>
+	<testCase>
+		<text>1&amp;11</text>
+		<wordBreakExtension enabled="false" />
+		<expectedMatch kwid="1&amp;1" start="0" end="3" raw="1&amp;1" />
+	</testCase>
+	<testCase>
+		<text>11&amp;11</text>
+		<wordBreakExtension enabled="false" />
+		<expectedMatch kwid="1&amp;1" start="1" end="4" raw="1&amp;1" />
+	</testCase>
+	<testCase>
+		<text>1 1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="3" raw="1 1" />
+	</testCase>
+	<testCase>
+		<text>1  1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="4" raw="1  1" />
+	</testCase>
+	<testCase>
+		<text>1-1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="3" raw="1-1" />
+	</testCase>
+	<testCase>
+		<text>1 - 1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="5" raw="1 - 1" />
+	</testCase>
+	<testCase>
+		<text>1,1</text>
+		<expectedMatch kwid="1&amp;1" start="0" end="3" raw="1,1" />
+	</testCase>
+	<testCase>
+		<text>1+1</text>
+		<!-- Note that '+' is NOT considered punctuation! -->
+	</testCase>
+	
+	<!-- Case-sensitivity -->
+	
+	<testCase>
+		<text>UPPER, LOWER, AND MIXED</text>
+		<expectedMatch kwid="UPPER" start="0" end="5" raw="UPPER" />
+		<expectedMatch kwid="Upper" start="0" end="5" raw="UPPER" />
+		<expectedMatch kwid="Lower" start="7" end="12" raw="LOWER" />
+		<expectedMatch kwid="Mixed" start="18" end="23" raw="MIXED" />
+	</testCase>
+	<testCase>
+		<text>upper, lower, and mixed</text>
+		<expectedMatch kwid="Upper" start="0" end="5" raw="upper" />
+		<expectedMatch kwid="Lower" start="7" end="12" raw="lower" />
+		<expectedMatch kwid="lower" start="7" end="12" raw="lower" />
+		<expectedMatch kwid="Mixed" start="18" end="23" raw="mixed" />
+	</testCase>
+	<testCase>
+		<text>UpPeR, LoWeR, aNd MiXeD</text>
+		<expectedMatch kwid="Upper" start="0" end="5" raw="UpPeR" />
+		<expectedMatch kwid="Lower" start="7" end="12" raw="LoWeR" />
+		<expectedMatch kwid="MiXeD" start="18" end="23" raw="MiXeD" />
+		<expectedMatch kwid="Mixed" start="18" end="23" raw="MiXeD" />
+	</testCase>
+	
+	<!-- Punctuation-sensitivity -->
+	<testCase>
+		<text>att</text>
+	</testCase>
+	<testCase>
+		<text>ATT</text>
+		<expectedMatch kwid="ATT" start="0" end="3" raw="ATT" />
+	</testCase>
+	<testCase>
+		<text>at&amp;t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="4" raw="at&amp;t" />
+		<expectedMatch kwid="at&amp;t" start="0" end="4" raw="at&amp;t" />
+	</testCase>
+	<testCase>
+		<text>at &amp;t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="5" raw="at &amp;t" />
+		<expectedMatch kwid="at&amp;t" start="0" end="5" raw="at &amp;t" />
+	</testCase>
+	<testCase>
+		<text>at&amp; t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="5" raw="at&amp; t" />
+		<expectedMatch kwid="at&amp;t" start="0" end="5" raw="at&amp; t" />
+	</testCase>
+	<testCase>
+		<text>at &amp; t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="6" raw="at &amp; t" />
+		<expectedMatch kwid="at&amp;t" start="0" end="6" raw="at &amp; t" />
+	</testCase>
+	<testCase>
+		<text>at t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="4" raw="at t" />
+	</testCase>
+	<testCase>
+		<text>at-t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="4" raw="at-t" />
+	</testCase>
+	<testCase>
+		<text>at -t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="5" raw="at -t" />
+	</testCase>
+	<testCase>
+		<text>at- t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="5" raw="at- t" />
+	</testCase>
+	<testCase>
+		<text>at - t</text>
+		<expectedMatch kwid="AT&amp;T" start="0" end="6" raw="at - t" />
+	</testCase>
+	<testCase>
+		<text>Mr. .com</text>
+		<expectedMatch kwid="MR. .COM" start="0" end="8" raw="Mr. .com" />
+		<expectedMatch kwid="mr. .com" start="0" end="8" raw="Mr. .com" />
+	</testCase>
+	<testCase>
+		<text>Mr com</text>
+		<expectedMatch kwid="MR. .COM" start="0" end="6" raw="Mr com" />
+	</testCase>
+	<testCase>
+		<text>Mr. com</text>
+		<expectedMatch kwid="MR. .COM" start="0" end="7" raw="Mr. com" />
+	</testCase>
+	<testCase>
+		<text>Mr .com</text>
+		<expectedMatch kwid="MR. .COM" start="0" end="7" raw="Mr .com" />
+	</testCase>
+	<testCase>
+		<text>Mr..com</text>
+		<expectedMatch kwid="MR. .COM" start="0" end="7" raw="Mr..com" />
+	</testCase>
+	<testCase>
+		<text>Mr . (*) . com</text>
+		<expectedMatch kwid="MR. .COM" start="0" end="14" raw="Mr . (*) . com" />
+	</testCase>
+
+	<!-- Permutations of case- and punctuation-sensitivity -->
+	<testCase>
+		<text>Oncogene Protein p21(ras)</text>
+		<expectedMatch kwid="p21_pc" start="0" end="25" raw="Oncogene Protein p21(ras)" />
+		<expectedMatch kwid="p21_p" start="0" end="25" raw="Oncogene Protein p21(ras)" />
+		<expectedMatch kwid="p21_c" start="0" end="25" raw="Oncogene Protein p21(ras)" />
+		<expectedMatch kwid="p21" start="0" end="25" raw="Oncogene Protein p21(ras)" />
+	</testCase>
+	<testCase>
+		<text>Oncogene  Protein  p21 ( ras )</text>
+		<expectedMatch kwid="p21_pc" start="0" end="30" raw="Oncogene  Protein  p21 ( ras )" />
+		<expectedMatch kwid="p21_p" start="0" end="30" raw="Oncogene  Protein  p21 ( ras )" />
+		<expectedMatch kwid="p21_c" start="0" end="30" raw="Oncogene  Protein  p21 ( ras )" />
+		<expectedMatch kwid="p21" start="0" end="30" raw="Oncogene  Protein  p21 ( ras )" />
+	</testCase>
+
+	<testCase>
+		<text>ONCOGENE PROTEIN p21(RAS)</text>
+		<expectedMatch kwid="p21_p" start="0" end="25" raw="ONCOGENE PROTEIN p21(RAS)" />
+		<expectedMatch kwid="p21" start="0" end="25" raw="ONCOGENE PROTEIN p21(RAS)" />
+	</testCase>
+	<testCase>
+		<text>ONCOGENE  PROTEIN  p21 ( RAS )</text>
+		<expectedMatch kwid="p21_p" start="0" end="30" raw="ONCOGENE  PROTEIN  p21 ( RAS )" />
+		<expectedMatch kwid="p21" start="0" end="30" raw="ONCOGENE  PROTEIN  p21 ( RAS )" />
+	</testCase>
+
+	<testCase>
+		<text>Oncogene Protein p21 ras</text>
+		<expectedMatch kwid="p21_c" start="0" end="24" raw="Oncogene Protein p21 ras" />
+		<expectedMatch kwid="p21" start="0" end="24" raw="Oncogene Protein p21 ras" />
+	</testCase>
+	<testCase>
+		<text>Oncogene  Protein  p21  ras</text>
+		<expectedMatch kwid="p21_c" start="0" end="27" raw="Oncogene  Protein  p21  ras" />
+		<expectedMatch kwid="p21" start="0" end="27" raw="Oncogene  Protein  p21  ras" />
+	</testCase>
+	
+	<testCase>
+		<text>ONCOGENE PROTEIN p21 RAS</text>
+		<expectedMatch kwid="p21" start="0" end="24" raw="ONCOGENE PROTEIN p21 RAS" />
+	</testCase>
+	<testCase>
+		<text>ONCOGENE  PROTEIN  p21  RAS</text>
+		<expectedMatch kwid="p21" start="0" end="27" raw="ONCOGENE  PROTEIN  p21  RAS" />
+	</testCase>
+
+	<!-- Permutations of case- and punctuation-sensitivity with leading and trailing spaces -->
+	<testCase>
+		<text> Oncogene Protein p21(ras) </text>
+		<expectedMatch kwid="p21_pc" start="1" end="26" raw="Oncogene Protein p21(ras)" />
+		<expectedMatch kwid="p21_p" start="1" end="26" raw="Oncogene Protein p21(ras)" />
+		<expectedMatch kwid="p21_c" start="1" end="26" raw="Oncogene Protein p21(ras)" />
+		<expectedMatch kwid="p21" start="1" end="26" raw="Oncogene Protein p21(ras)" />
+	</testCase>
+	<testCase>
+		<text> Oncogene  Protein  p21 ( ras ) </text>
+		<expectedMatch kwid="p21_pc" start="1" end="31" raw="Oncogene  Protein  p21 ( ras )" />
+		<expectedMatch kwid="p21_p" start="1" end="31" raw="Oncogene  Protein  p21 ( ras )" />
+		<expectedMatch kwid="p21_c" start="1" end="31" raw="Oncogene  Protein  p21 ( ras )" />
+		<expectedMatch kwid="p21" start="1" end="31" raw="Oncogene  Protein  p21 ( ras )" />
+	</testCase>
+
+	<testCase>
+		<text> ONCOGENE PROTEIN p21(RAS) </text>
+		<expectedMatch kwid="p21_p" start="1" end="26" raw="ONCOGENE PROTEIN p21(RAS)" />
+		<expectedMatch kwid="p21" start="1" end="26" raw="ONCOGENE PROTEIN p21(RAS)" />
+	</testCase>
+	<testCase>
+		<text> ONCOGENE  PROTEIN  p21 ( RAS ) </text>
+		<expectedMatch kwid="p21_p" start="1" end="31" raw="ONCOGENE  PROTEIN  p21 ( RAS )" />
+		<expectedMatch kwid="p21" start="1" end="31" raw="ONCOGENE  PROTEIN  p21 ( RAS )" />
+	</testCase>
+
+	<testCase>
+		<text> Oncogene Protein p21 ras </text>
+		<expectedMatch kwid="p21_c" start="1" end="25" raw="Oncogene Protein p21 ras" />
+		<expectedMatch kwid="p21" start="1" end="25" raw="Oncogene Protein p21 ras" />
+	</testCase>
+	<testCase>
+		<text> Oncogene  Protein  p21  ras </text>
+		<expectedMatch kwid="p21_c" start="1" end="28" raw="Oncogene  Protein  p21  ras" />
+		<expectedMatch kwid="p21" start="1" end="28" raw="Oncogene  Protein  p21  ras" />
+	</testCase>
+	
+	<testCase>
+		<text> ONCOGENE PROTEIN p21 RAS </text>
+		<expectedMatch kwid="p21" start="1" end="25" raw="ONCOGENE PROTEIN p21 RAS" />
+	</testCase>
+	<testCase>
+		<text> ONCOGENE  PROTEIN  p21  RAS </text>
+		<expectedMatch kwid="p21" start="1" end="28" raw="ONCOGENE  PROTEIN  p21  RAS" />
+	</testCase>
+	
+	<!-- Benchmark-exposed failure #1 -->
+
+	<testCase>
+		<symbols>Ambrysus (Ambrysus) arizonus</symbols>
+	</testCase>
+	<testCase>
+		<symbols raw="AMBRYSUS (AMBRYSUS) ARIZONUS">Ambrysus (Ambrysus) arizonus</symbols>
+	</testCase>
+	<testCase>
+		<symbols raw="AMBRYSUS AMBRYSUS ARIZONUS">Ambrysus (Ambrysus) arizonus</symbols>
+	</testCase>
+	<testCase>
+		<symbols raw="Ambrysus&#xA;(Ambrysus)&#xA;arizonus">Ambrysus (Ambrysus) arizonus</symbols>
+	</testCase>
+	<testCase>
+		<symbols raw="Ambrysus    &#xA;    (Ambrysus)    &#xA;    arizonus">Ambrysus (Ambrysus) arizonus</symbols>
+	</testCase>
+	<testCase>
+		<symbols raw="AMBRYSUS    &#xA;    (AMBRYSUS)    &#xA;    ARIZONUS">Ambrysus (Ambrysus) arizonus</symbols>
+	</testCase>
+	<testCase>
+		<symbols raw="AMBRYSUS    &#xA;    (AMBRYSUS)    &#xA;    ARIZONUS">Ambrysus (Ambrysus) arizonus</symbols>
+		<head>DOLOR SED REBUM. </head>
+		<tail>&#xA;ERAT,</tail>
+	</testCase>
+	<testCase>
+		<text><![CDATA[HELENORAE DOLORES ET LOREM ALIQUYAM AMET. DOLOR SED REBUM. AMBRYSUS    
+    (AMBRYSUS)    
+    ARIZONUS
+ERAT, ERAT, CLITA TEMPOR SEA ET EIRMOD ALIQUYAM VERO NO SIT TAKIMATA DOLOR KASD VERO VERO TAKIMATA CONSETETUR EA LOREM UT
+]]></text>
+		<expectedMatch kwid="Ambrysus (Ambrysus)" start="59" end="86" 
+		raw="AMBRYSUS    &#xA;    (AMBRYSUS)" />
+		<expectedMatch kwid="Ambrysus (Ambrysus) arizonus" start="59" end="103" 
+		raw="AMBRYSUS    &#xA;    (AMBRYSUS)    &#xA;    ARIZONUS" />
+	</testCase>
+
+	<!-- Benchmark-exposed failure #1 -->
+
+	<testCase>
+		<text><![CDATA[PROCAMBARUS (PENNIDES)
+
+SEA]]></text>
+		<expectedMatch kwid="Procambarus (Pennides)" start="0" end="22" 
+		raw="PROCAMBARUS (PENNIDES)" />
+	</testCase>
+
+	<!-- Ron reported issue -->
+	<testCase>
+		<text><![CDATA[See http://www.state.la.us/about_history2.htm and elsewhere.]]></text>
+		<expectedMatch kwid="La." start="21" end="24" raw="la." />
+	</testCase>
+	
+	<!-- Most precise match -->
+	<testCase>
+		<text>La</text>
+		<expectedMatch kwid="La." start="0" end="2" raw="La" />
+		<expectedMatch kwid="La" start="0" end="2" raw="La" />
+	</testCase>
+	<testCase>
+		<notifyMostPreciseMatch enabled="true" />
+		<text>La</text>
+		<expectedMatch kwid="La" start="0" end="2" raw="La" />
+	</testCase>
+	
+	<!-- Diacriticals and case-sensitivity -->
+	<testCase>
+		<text>Hag&#229;t&#241;a</text>
+		<expectedMatch kwid="Hagatna" start="0" end="7" raw="Hag&#229;t&#241;a" />
+		<expectedMatch kwid="Hag&#229;t&#241;a_c" start="0" end="7" raw="Hag&#229;t&#241;a" />
+		<expectedMatch kwid="Hag&#229;t&#241;a" start="0" end="7" raw="Hag&#229;t&#241;a" />
+	</testCase>
+	<testCase>
+		<notifyMostPreciseMatch enabled="true" />
+		<text>Hag&#229;t&#241;a</text>
+		<expectedMatch kwid="Hag&#229;t&#241;a_c" start="0" end="7" raw="Hag&#229;t&#241;a" />
+		<expectedMatch kwid="Hag&#229;t&#241;a" start="0" end="7" raw="Hag&#229;t&#241;a" />
+	</testCase>
+	<testCase>
+		<text>Hagatna</text>
+		<expectedMatch kwid="Hagatna_c" start="0" end="7" raw="Hagatna" />
+		<expectedMatch kwid="Hagatna" start="0" end="7" raw="Hagatna" />
+		<expectedMatch kwid="Hag&#229;t&#241;a" start="0" end="7" raw="Hagatna" />
+	</testCase>
+	<testCase>
+		<notifyMostPreciseMatch enabled="true" />
+		<text>Hagatna</text>
+		<expectedMatch kwid="Hagatna_c" start="0" end="7" raw="Hagatna" />
+		<expectedMatch kwid="Hagatna" start="0" end="7" raw="Hagatna" />
+	</testCase>
+	
+	<!-- Bug reported by Ron after most precise matching feature added -->
+	<testCase>
+		<text>Florida 4.5 Republic of West Florida 4.6 Republic of Indian Stream</text>
+		<expectedMatch kwid="Florida" start="0" end="7" raw="Florida" />
+		<expectedMatch kwid="Republic" start="12" end="20" raw="Republic" />
+		<expectedMatch kwid="West" start="24" end="28" raw="West" />
+		<expectedMatch kwid="Florida" start="29" end="36" raw="Florida" />
+		<expectedMatch kwid="Republic" start="41" end="49" raw="Republic" />
+		<expectedMatch kwid="Indian" start="53" end="59" raw="Indian" />
+		<expectedMatch kwid="Stream" start="60" end="66" raw="Stream" />
+	</testCase>
+	<testCase>
+		<notifyMostPreciseMatch enabled="true" />
+		<text>Florida 4.5 Republic of West Florida 4.6 Republic of Indian Stream</text>
+		<expectedMatch kwid="Florida" start="0" end="7" raw="Florida" />
+		<expectedMatch kwid="Republic" start="12" end="20" raw="Republic" />
+		<expectedMatch kwid="West" start="24" end="28" raw="West" />
+		<expectedMatch kwid="Florida" start="29" end="36" raw="Florida" />
+		<expectedMatch kwid="Republic" start="41" end="49" raw="Republic" />
+		<expectedMatch kwid="Indian" start="53" end="59" raw="Indian" />
+		<expectedMatch kwid="Stream" start="60" end="66" raw="Stream" />
+	</testCase>
+	
+	<testCase>
+		<notifyLongestKeywordsOnly enabled="false" />
+		<text>ASTEROLECANIUM&#xA;foo</text>
+		<expectedMatch kwid="Asterolecanium" start="0" end="14" raw="ASTEROLECANIUM" />
+		<!-- does not match because word break filtering
+		<expectedMatch kwid="Lecanium" start="6" end="14" raw="Lecanium" />
+		 -->
+	</testCase>
+	<testCase>
+		<notifyLongestKeywordsOnly enabled="false" />
+		<notifyMostPreciseMatch enabled="true" />
+		<text>ASTEROLECANIUM&#xA;foo</text>
+		<expectedMatch kwid="Asterolecanium" start="0" end="14" raw="ASTEROLECANIUM" />
+		<!-- does not match because word break filtering
+		<expectedMatch kwid="Lecanium" start="6" end="14" raw="Lecanium" />
+		 -->
+	</testCase>
+
+
+	<testCase>
+		<notifyLongestKeywordsOnly enabled="false" />
+		<notifyMostPreciseMatch enabled="false" />
+		<text>Salt Lake City</text>
+		<expectedMatch kwid="Salt Lake City" start="0" end="14" raw="Salt Lake City" />
+		<expectedMatch kwid="Lake City" start="5" end="14" raw="Lake City" />
+		<expectedMatch kwid="City" start="10" end="14" raw="City" />
+	</testCase>
+	<testCase>
+		<notifyLongestKeywordsOnly enabled="true" />
+		<notifyMostPreciseMatch enabled="false" />
+		<text>Salt Lake City</text>
+		<expectedMatch kwid="Salt Lake City" start="0" end="14" raw="Salt Lake City" />
+	</testCase>
+	<testCase>
+		<notifyLongestKeywordsOnly enabled="false" />
+		<notifyMostPreciseMatch enabled="true" />
+		<text>Salt Lake City</text>
+		<expectedMatch kwid="Salt Lake City" start="0" end="14" raw="Salt Lake City" />
+		<expectedMatch kwid="Lake City" start="5" end="14" raw="Lake City" />
+		<expectedMatch kwid="City" start="10" end="14" raw="City" />
+	</testCase>
+	<testCase>
+		<notifyLongestKeywordsOnly enabled="true" />
+		<notifyMostPreciseMatch enabled="true" />
+		<text>Salt Lake City</text>
+		<expectedMatch kwid="Salt Lake City" start="0" end="14" raw="Salt Lake City" />
+	</testCase>
+	
+</tests>

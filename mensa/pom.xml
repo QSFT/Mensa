@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.dell.mensa</groupId>
+	<artifactId>mensa</artifactId>
+	<version>1.0.0</version>
+	<name>Mensa</name>
+	<description>Mensa is a generic, flexible, enhanced, and efficient Java implementation of a pattern matching state machine as described by the 1975 paper by Alfred Aho and Margaret Corasick.</description>
+	<organization>
+		<name>Dell, Inc</name>
+		<url>http://dell.com</url>
+	</organization>
+	<inceptionYear>2014</inceptionYear>
+	<build>
+		<finalName>mensa-${version}</finalName>
+	</build>
+	<properties>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.testTarget>1.7</maven.compiler.testTarget>
+		<maven.compiler.testSource>1.7</maven.compiler.testSource>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12-beta-3</version>
+		</dependency>
+	</dependencies>
+	<url>http://github/dell-oss/Mensa</url>
+</project>
