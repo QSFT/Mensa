@@ -19,23 +19,24 @@ import com.dell.mensa.IKeyword;
 import com.dell.mensa.IKeywords;
 import com.dell.mensa.ITailBuffer;
 import com.dell.mensa.ITextSource;
+import com.dell.mensa.impl.generic.AbstractAhoCorasickMachineTest;
 import com.dell.mensa.impl.generic.AhoCorasickMachine;
-import com.dell.mensa.impl.generic.AhoCorasickMachineTestBase;
 import com.dell.mensa.impl.generic.Keywords;
 import com.dell.mensa.impl.generic.Match;
 
 /**
- * {@link AbstractCharacterAhoCorasickMachineTestBase} extends {@link AhoCorasickMachineTestBase} for testing machines
- * that work with {@link Character} symbols.
+ * {@link AbstractCharacterAhoCorasickMachineTestBase} extends {@link AbstractAhoCorasickMachineTest} for testing
+ * machines that work with {@link Character} symbols.
  *
  * @author <a href="http://www.linkedin.com/in/faseidl/" target="_blank">F. Andy Seidl</a>
  */
-public abstract class AbstractCharacterAhoCorasickMachineTestBase extends AhoCorasickMachineTestBase<Character>
+public abstract class AbstractCharacterAhoCorasickMachineTestBase extends AbstractAhoCorasickMachineTest<Character>
 {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.dell.mensa.impl.generic.AhoCorasickMachineTestBase#getRawText(com.dell.mensa.ITextSource, long, long)
+	 * @see com.dell.mensa.impl.generic.AbstractAhoCorasickMachineTest#getRawText(com.dell.mensa.ITextSource, long,
+	 * long)
 	 */
 	@Override
 	protected String getRawText(final ITextSource<Character> textSource_, final long start_, final long end_)

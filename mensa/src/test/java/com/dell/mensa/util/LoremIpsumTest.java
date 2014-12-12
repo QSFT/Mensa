@@ -257,6 +257,9 @@ public class LoremIpsumTest
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+			value = "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+			justification = "Testing null argument")
 	public void testLoadTextResourceString_IllegalArgument() throws IOException
 	{
 		loremIpsum.loadTextResource(null);
@@ -278,6 +281,9 @@ public class LoremIpsumTest
 
 	@SuppressWarnings("static-method")
 	@Test(expected = IllegalArgumentException.class)
+	@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+			value = "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+			justification = "Testing null argument")
 	public void testNormalize_IllegalArgument() throws IOException
 	{
 		LoremIpsum.normalize(null);
@@ -301,6 +307,9 @@ public class LoremIpsumTest
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+			value = "NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS",
+			justification = "Testing null argument")
 	public void testSetText_Null() throws IOException
 	{
 		loremIpsum.setText(null);

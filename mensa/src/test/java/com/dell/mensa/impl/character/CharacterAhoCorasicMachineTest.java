@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,16 +47,16 @@ public class CharacterAhoCorasicMachineTest extends AbstractCharacterAhoCorasick
 	// Fixture
 	// =========================================================================
 
-	private final int s0 = 0;
-	private final int s1 = 1;
-	private final int s2 = 2;
-	private final int s3 = 3;
-	private final int s4 = 4;
-	private final int s5 = 5;
-	private final int s6 = 6;
-	private final int s7 = 7;
-	private final int s8 = 8;
-	private final int s9 = 9;
+	private static final int s0 = 0;
+	private static final int s1 = 1;
+	private static final int s2 = 2;
+	private static final int s3 = 3;
+	private static final int s4 = 4;
+	private static final int s5 = 5;
+	private static final int s6 = 6;
+	private static final int s7 = 7;
+	private static final int s8 = 8;
+	private static final int s9 = 9;
 
 	private final CharacterKeyword he = new CharacterKeyword("he");
 	private final CharacterKeyword she = new CharacterKeyword("she");
@@ -899,7 +900,7 @@ public class CharacterAhoCorasicMachineTest extends AbstractCharacterAhoCorasick
 		String text = "she ushers in his sheet for hers";
 		if (bUpper_)
 		{
-			text = text.toUpperCase();
+			text = text.toUpperCase(Locale.ENGLISH);
 		}
 
 		final ITextSource<Character> textSource = new CharacterStringTextSource(text);

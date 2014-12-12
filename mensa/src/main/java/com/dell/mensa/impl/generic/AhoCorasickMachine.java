@@ -1123,8 +1123,6 @@ public class AhoCorasickMachine<S extends Comparable<S>>
 			final int keywordLength = keyword_.length();
 			while (iKeywordPostion < keywordLength && iMatchedPosition < end_)
 			{
-				final S keywordSymbol = keyword_.symbolAt(iKeywordPostion++);
-
 				S matchedSymbol = buffer.symbolAt(iMatchedPosition++);
 				while (matchedSymbol == null && iMatchedPosition < end_)
 				{
@@ -1136,10 +1134,11 @@ public class AhoCorasickMachine<S extends Comparable<S>>
 					return false;
 				}
 
+				final S keywordSymbol = keyword_.symbolAt(iKeywordPostion++);
 				if (!matchedSymbol.equals(keywordSymbol))
 				{
 					// It might be the case that the symbols are not equal because we of a fuzzy punctuation
-					if (isPunctuationExtensionEnabled && space == matchedSymbol && classifier.isPunctuation(keywordSymbol))
+					if (isPunctuationExtensionEnabled && matchedSymbol.equals(space) && classifier.isPunctuation(keywordSymbol))
 					{
 						continue;
 					}
@@ -1600,7 +1599,7 @@ public class AhoCorasickMachine<S extends Comparable<S>>
 					// If the optional symbol is punctuation, expand to include matching punctuation symbol, if any.
 					else if (classifier.isPunctuation(a) && end + nWhite < rawBuffer.end() && a.equals(rawBuffer.symbolAt(end + nWhite)))
 					{
-						end += (nWhite + 1);
+						end += nWhite + 1;
 					}
 				}
 				textSource_.setPosition(savedPosition);

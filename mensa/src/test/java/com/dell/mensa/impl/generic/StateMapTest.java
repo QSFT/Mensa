@@ -61,12 +61,9 @@ public class StateMapTest
 	/**
 	 * Creates an edge map for a state in a simulated map.
 	 *
-	 * @param state_
-	 *            specifies the state for which the edge map is requested.
-	 *
-	 * @return Returns the edge map for the specified state.
+	 * @return Returns a new mock edge map.
 	 */
-	private Map<Character, Integer> mockEdgeMap(final int state_)
+	private Map<Character, Integer> mockEdgeMap()
 	{
 		final Map<Character, Integer> map = new HashMap<>();
 
@@ -93,8 +90,7 @@ public class StateMapTest
 
 		for (int state = 0; state < NUM_STATES; state++)
 		{
-			map.put(state, mockEdgeMap(state));
-
+			map.put(state, mockEdgeMap());
 		}
 
 		return map;

@@ -28,7 +28,7 @@ import com.dell.mensa.ITextSource;
 import com.dell.mensa.util.Verify;
 
 /**
- * {@link AhoCorasickMachineTestBase} is an abstract base class that simplifies writing unit test for
+ * {@link AbstractAhoCorasickMachineTest} is an abstract base class that simplifies writing unit test for
  * {@link AhoCorasickMachine} or derived classes.
  *
  * @author <a href="http://www.linkedin.com/in/faseidl/" target="_blank">F. Andy Seidl</a>
@@ -37,7 +37,7 @@ import com.dell.mensa.util.Verify;
  *            the data type of the symbols
  *
  */
-public abstract class AhoCorasickMachineTestBase<S extends Comparable<S>>
+public abstract class AbstractAhoCorasickMachineTest<S extends Comparable<S>>
 {
 	private static final Logger log = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -73,9 +73,9 @@ public abstract class AhoCorasickMachineTestBase<S extends Comparable<S>>
 	}
 
 	/**
-	 * {@link com.dell.mensa.impl.generic.AhoCorasickMachineTestBase.IMatcher} defines an abstraction that layer used to
-	 * hide the matching API used by an {@link AhoCorasickMachine} instance. This simplifies writing tests capable of
-	 * testing matching using either the lister or iterator methods.
+	 * {@link com.dell.mensa.impl.generic.AbstractAhoCorasickMachineTest.IMatcher} defines an abstraction that layer
+	 * used to hide the matching API used by an {@link AhoCorasickMachine} instance. This simplifies writing tests
+	 * capable of testing matching using either the lister or iterator methods.
 	 *
 	 * @author <a href="http://www.linkedin.com/in/faseidl/" target="_blank">F. Andy Seidl</a>
 	 *

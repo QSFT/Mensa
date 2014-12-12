@@ -314,6 +314,9 @@ public class VerifyTest
 	 */
 	@SuppressWarnings("static-method")
 	@Test(expected = IllegalArgumentException.class)
+	@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+			value = "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+			justification = "Testing null argument")
 	public void testNotEmptyString_Null()
 	{
 		final String value = null;
@@ -341,6 +344,9 @@ public class VerifyTest
 	 */
 	@SuppressWarnings("static-method")
 	@Test(expected = IllegalArgumentException.class)
+	@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+			value = "NP_NULL_PARAM_DEREF_NONVIRTUAL",
+			justification = "Testing null argument")
 	public void testNotEmptyObjectArray_Null()
 	{
 		final Object[] value = null;
