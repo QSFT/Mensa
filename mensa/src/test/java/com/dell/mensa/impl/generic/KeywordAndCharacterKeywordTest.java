@@ -313,4 +313,45 @@ public class KeywordAndCharacterKeywordTest
 			}
 		}
 	}
+
+	/**
+	 * Test code for <a href="https://github.com/dell-oss/Mensa/issues/1">issue #1</a>:
+	 * AbstractKeyword equals() and hashCode() do not consider userData
+	 */
+	@SuppressWarnings("static-method")
+	@Test
+	public void testIssue_1_equals()
+	{
+		final String userData = "myData";
+
+		final IKeyword<Character> a = new Keyword<>(HE);
+		final IKeyword<Character> au = new Keyword<>(HE, userData);
+		final IKeyword<Character> b = new CharacterKeyword(STR_HE);
+		final IKeyword<Character> bu = new CharacterKeyword(STR_HE, userData);
+
+		Assert.assertTrue(a.equals(a));
+		Assert.assertFalse(a.equals(au));
+		Assert.assertTrue(a.equals(b));
+		Assert.assertFalse(a.equals(bu));
+
+		Assert.assertFalse(au.equals(a));
+		Assert.assertTrue(au.equals(au));
+		Assert.assertFalse(au.equals(b));
+		Assert.assertTrue(au.equals(bu));
+
+		Assert.assertTrue(b.equals(a));
+		Assert.assertFalse(b.equals(au));
+		Assert.assertTrue(b.equals(b));
+		Assert.assertFalse(b.equals(bu));
+
+		Assert.assertFalse(bu.equals(a));
+		Assert.assertTrue(bu.equals(au));
+		Assert.assertFalse(bu.equals(b));
+		Assert.assertTrue(bu.equals(bu));
+		
+		Assert.assertEquals(a.hashCode(), a.hashCode());
+		Assert.assertEquals(a.hashCode(), b.hashCode());
+		Assert.assertEquals(au.hashCode(), au.hashCode());
+		Assert.assertEquals(au.hashCode(), bu.hashCode());
+	}
 }

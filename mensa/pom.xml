@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dell.mensa</groupId>
 	<artifactId>mensa</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Mensa</name>
 	<description>Mensa is a generic, flexible, enhanced, and efficient Java implementation of a pattern matching state machine as described by the 1975 paper by Alfred Aho and Margaret Corasick.</description>
 	<organization>

@@ -132,6 +132,9 @@ public abstract class AbstractKeyword<S> implements IKeyword<S>
 		result = prime * result + (isCaseSensitive() ? 1231 : 1237);
 		result = prime * result + (isPunctuationSensitive() ? 1231 : 1237);
 
+		final Object userData = getUserData();
+		result = prime * result + (userData == null ? 0 : userData.hashCode());
+
 		final int length = length();
 		for (int i = 0; i < length; i++)
 		{
@@ -176,6 +179,24 @@ public abstract class AbstractKeyword<S> implements IKeyword<S>
 		if (isPunctuationSensitive() != other.isPunctuationSensitive())
 		{
 			return false;
+		}
+
+		final Object userData = getUserData();
+		final Object otherUserData = other.getUserData();
+
+		if (userData == null)
+		{
+			if (otherUserData != null)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if (!userData.equals(otherUserData))
+			{
+				return false;
+			}
 		}
 
 		final int length = length();
