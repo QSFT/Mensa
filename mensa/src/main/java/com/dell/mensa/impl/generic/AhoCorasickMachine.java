@@ -871,6 +871,15 @@ public class AhoCorasickMachine<S extends Comparable<S>>
 			return matches.remove(); // This throws NoSuchElementException if matches.isEmpty().
 		}
 
+		/* (non-Javadoc)
+		 * @see java.util.Iterator#remove()
+		 */
+		@Override
+		public void remove()
+		{
+			throw new UnsupportedOperationException();
+		}
+
 		// =========================================================================
 		// Internal methods
 		// =========================================================================
